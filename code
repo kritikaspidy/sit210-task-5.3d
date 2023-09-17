@@ -1,0 +1,248 @@
+import RPi.GPIO as GPIO 	# to control gpio pins on raspberry pi
+import tkinter as TK    	# to create a GUI
+import time             	# to introduce delays in morse code flashes
+
+GPIO.setmode(GPIO.BOARD)    
+GPIO.setwarnings(False)     
+
+GPIO.setup(15,GPIO.OUT)    # 15 - output pin 
+
+window = TK.Tk()           
+window.title("LED Name Blink")
+window.geometry("400x400")
+
+# dot dash and silence - functions fo morse code
+
+def DOT():
+	GPIO.output(15, GPIO.HIGH)
+	time.sleep(0.5)
+	
+def DASH():
+	GPIO.output(15, GPIO.HIGH)
+	time.sleep(1.5)
+	
+def SILENCE():
+	GPIO.output(15, GPIO.LOW)
+	time.sleep(0.5)
+
+# A-Z morse code combinations
+
+def A():
+	DOT()
+	SILENCE()
+	DASH()
+
+def B():
+	DASH()
+	SILENCE()
+	DOT()
+	SILENCE()
+	DOT()
+	SILENCE()
+	DOT()
+
+def C():
+	DASH()
+	SILENCE()
+	DOT()
+	SILENCE()
+	DASH()
+	SILENCE()
+	DOT()
+
+def D():
+	DASH()
+	SILENCE()
+	DOT()
+	SILENCE()
+	DOT()
+
+def E():
+	DOT();
+	
+def F():
+	DOT()
+	SILENCE()
+	DOT()
+	SILENCE()
+	DASH()
+	SILENCE()
+	DOT()
+	
+def G():
+	DASH()
+	SILENCE()
+	DASH()
+	SILENCE()
+	DOT()
+
+def H():
+	DOT()
+	SILENCE()
+	DOT()
+	SILENCE()
+	DOT()
+	SILENCE()
+	DOT()
+	
+def I():
+	DOT()
+	SILENCE()
+	DOT()
+
+def J():
+	DOT()
+	SILENCE()
+	DASH()
+	SILENCE()
+	DASH()
+	SILENCE()
+	DASH()
+	
+def K():
+	DASH()
+	SILENCE()
+	DOT()
+	SILENCE()
+	DASH()
+
+def L():
+	DOT()
+	SILENCE()
+	DASH()
+	SILENCE()
+	DOT()
+	SILENCE()
+	DOT()
+
+def M():
+	DASH()
+	SILENCE()
+	DASH()
+	
+def N():
+	DASH()
+	SILENCE()
+	DOT()
+
+def O():
+	DASH()
+	SILENCE()
+	DASH()
+	SILENCE()
+	DASH()
+	
+def P():
+	DOT()
+	SILENCE()
+	DASH()
+	SILENCE()
+	DASH()
+	SILENCE()
+	DOT()
+
+def Q():
+	DASH()
+	SILENCE()
+	DASH()
+	SILENCE()
+	DOT()
+	SILENCE()
+	DASH()
+	
+def R():
+	DOT()
+	SILENCE()
+	DASH()
+	SILENCE()
+	DOT()
+
+def S():
+	DOT()
+	SILENCE()
+	DOT()
+	SILENCE()
+	DOT()
+	
+def T():
+	DASH()
+	SILENCE()
+
+def U():
+	DOT()
+	SILENCE()
+	DOT()
+	SILENCE()
+	DASH()
+	
+def V():
+	DOT()
+	SILENCE()
+	DOT()
+	SILENCE()
+	DOT()
+	SILENCE()
+	DASH()
+	
+def W():
+	DOT()
+	SILENCE()
+	DASH()
+	SILENCE()
+	DASH()
+	
+def X():
+	DASH()
+	SILENCE()
+	DOT()
+	SILENCE()
+	DOT()
+	SILENCE()
+	DASH()
+	
+def Y():
+	DASH()
+	SILENCE()
+	DOT()
+	SILENCE()
+	DASH()
+	SILENCE()
+	DASH()
+	
+def Z():
+	DASH()
+	SILENCE()
+	DASH()
+	SILENCE()
+	DOT()
+	SILENCE()
+	DOT()
+	
+	
+def morse():
+    entry = nameentry.get().upper()
+    for keyword in entry:
+        if 'A' <= keyword <= 'Z':
+            globals()[keyword]()  
+
+
+def close():
+	GPIO.cleanup()
+	window.destroy()
+
+# tkinter GUI widgets
+
+lab = TK.Label(window, text = "Enter the Name")
+
+nameentry = TK.Entry(window)
+
+Btn = TK.Button(window, text = "START", command = morse)
+
+lab.pack()
+nameentry.pack()
+Btn.pack()
+
+window.protocol("WM_DELETE_WINDOW", close)
+
+window.mainloop()
+		
